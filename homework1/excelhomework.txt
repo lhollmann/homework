@@ -1,0 +1,49 @@
+Sub stockVolume()
+
+    Dim ticker As String
+    Dim openValue as Double
+    Dim yearlyChange As Double
+    Dim percentChange As Double
+    Dim totalVolume As Double 
+    Dim tickerNumber As Integer
+
+    ticker = Cells(2,1).Value
+    openValue = Cells(2,3).Value
+    yearlyChange = 0
+    percentChange = 0
+    totalVolume = 0
+    tickerNumber = 2
+
+    for i = 2 to 5000
+
+        if(Cells(i,1).Value = ticker) Then
+
+            totalVolume = totalVolume + Cells(i,7).Value
+        
+        Elseif(Cells(i,1).Value <> ticker) Then
+
+            Cells(tickerNumber,10) = openValue - Cells(i,6).Value
+            Cells(tickerNumber,11) = (Cells(tickerNumber,10).Value / openValue)
+
+            Cells(tickerNumber,9) = ticker
+            Cells(tickerNumber,12) = totalVolume
+
+            tickerNumber = tickerNumber + 1
+
+            ticker = Cells(i,1).Value
+            openValue = Cells(i,3).Value
+            totalVolume = Cells(i,7).Value
+            
+            
+        End if
+    
+    Next i
+
+    Cells(tickerNumber,10) = openValue - Cells(i,6).Value
+    Cells(tickerNumber,11) = (Cells(tickerNumber,10).Value / openValue)
+
+    Cells(tickerNumber,9) = ticker
+    Cells(tickerNumber,12) = totalVolume
+
+End Sub
+
